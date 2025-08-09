@@ -22,8 +22,8 @@ const register = asyncHandler(async (req, res) => {
     const user = new User({ name, email, password: hash });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN || '7d'
+    const token = jwt.sign({ _id: user._id }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '2d'
     });
 
     return res
