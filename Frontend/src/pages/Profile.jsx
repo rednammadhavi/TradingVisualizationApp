@@ -63,34 +63,40 @@ export default function ProfilePage() {
         }
     };
 
-    if (!profile) return <p className="text-center mt-6">Loading profile...</p>;
+    if (!profile)
+        return (
+            <div className="text-center mt-10 text-gray-600 dark:text-gray-300">
+                Loading profile...
+            </div>
+        );
 
     return (
-        <div className="relative flex justify-center items-center min-h-screen px-4 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="relative flex justify-center items-center min-h-[90.8vh] p-4 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
             {/* Background glow */}
             <div className="absolute top-0 left-0 w-60 h-60 bg-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
             <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-400 rounded-full blur-3xl opacity-20 animate-pulse delay-200"></div>
 
-            <div className="relative w-full max-w-lg backdrop-blur-xl bg-white/40 dark:bg-gray-800/40 border border-white/30 rounded-2xl shadow-2xl p-8 animate-fadeIn">
-                <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent mb-8">
+            {/* Main Card */}
+            <div className="relative w-full max-w-7xl backdrop-blur-xl bg-white/40 dark:bg-gray-800/40 border border-white/30 rounded-2xl shadow-2xl p-6 sm:p-10 animate-fadeIn">
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent mb-8">
                     My Profile
                 </h1>
 
                 {/* Profile View */}
                 {!editMode && !passwordMode && (
-                    <div className="space-y-4">
+                    <div className="space-y-4 text-gray-800 dark:text-gray-200">
                         <p><strong>Name:</strong> {profile.name}</p>
                         <p><strong>Email:</strong> {profile.email}</p>
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-4 pt-4">
                             <button
                                 onClick={() => setEditMode(true)}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[120px] py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-purple-500 text-white shadow-lg hover:scale-105 hover:shadow-purple-500/50 transition-all"
                             >
                                 Edit Profile
                             </button>
                             <button
                                 onClick={() => setPasswordMode(true)}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-400 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[120px] py-2.5 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg hover:scale-105 hover:shadow-yellow-500/50 transition-all"
                             >
                                 Change Password
                             </button>
@@ -98,34 +104,34 @@ export default function ProfilePage() {
                     </div>
                 )}
 
-                {/* Edit Profile Form */}
+                {/* Edit Profile */}
                 {editMode && (
                     <div className="space-y-4">
                         <input
-                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70"
+                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70 dark:text-white"
                             type="text"
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
                             placeholder="Name"
                         />
                         <input
-                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70"
+                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70 dark:text-white"
                             type="email"
                             value={form.email}
                             onChange={(e) => setForm({ ...form, email: e.target.value })}
                             placeholder="Email"
                         />
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-4">
                             <button
                                 onClick={handleProfileUpdate}
                                 disabled={loading}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-400 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[120px] py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg hover:scale-105 hover:shadow-green-500/50 transition-all"
                             >
                                 {loading ? "Saving..." : "Save"}
                             </button>
                             <button
                                 onClick={() => setEditMode(false)}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[120px] py-2.5 rounded-xl bg-gradient-to-r from-gray-400 to-gray-500 text-white shadow-lg hover:scale-105 hover:shadow-gray-500/50 transition-all"
                             >
                                 Cancel
                             </button>
@@ -133,12 +139,12 @@ export default function ProfilePage() {
                     </div>
                 )}
 
-                {/* Change Password Form */}
+                {/* Change Password */}
                 {passwordMode && (
                     <div className="space-y-4">
                         <div className="relative">
                             <input
-                                className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg pr-10 focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70"
+                                className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg pr-10 focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70 dark:text-white"
                                 type={showCurrent ? "text" : "password"}
                                 value={passwordForm.currentPassword}
                                 onChange={(e) =>
@@ -150,7 +156,7 @@ export default function ProfilePage() {
                                 placeholder="Current Password"
                             />
                             <span
-                                className="absolute right-3 top-3 cursor-pointer text-gray-500"
+                                className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-white"
                                 onClick={() => setShowCurrent(!showCurrent)}
                             >
                                 {showCurrent ? <FaEyeSlash /> : <FaEye />}
@@ -159,7 +165,7 @@ export default function ProfilePage() {
 
                         <div className="relative">
                             <input
-                                className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg pr-10 focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70"
+                                className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg pr-10 focus:ring-2 focus:ring-blue-500 bg-white/70 dark:bg-gray-700/70 dark:text-white"
                                 type={showNew ? "text" : "password"}
                                 value={passwordForm.newPassword}
                                 onChange={(e) =>
@@ -171,7 +177,7 @@ export default function ProfilePage() {
                                 placeholder="New Password"
                             />
                             <span
-                                className="absolute right-3 top-3 cursor-pointer text-gray-500"
+                                className="absolute right-3 top-3 cursor-pointer text-gray-500 dark:text-white"
                                 onClick={() => setShowNew(!showNew)}
                             >
                                 {showNew ? <FaEyeSlash /> : <FaEye />}
@@ -181,23 +187,23 @@ export default function ProfilePage() {
                         <div className="text-right">
                             <Link
                                 to="/forgot-password"
-                                className="text-sm text-blue-600 hover:underline"
+                                className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
                             >
                                 Forgot Password?
                             </Link>
                         </div>
 
-                        <div className="flex gap-3">
+                        <div className="flex flex-wrap gap-4">
                             <button
                                 onClick={handlePasswordChange}
                                 disabled={loading}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-400 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[140px] py-2.5 rounded-xl bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg hover:scale-105 hover:shadow-green-500/50 transition-all"
                             >
                                 {loading ? "Updating..." : "Update Password"}
                             </button>
                             <button
                                 onClick={() => setPasswordMode(false)}
-                                className="flex-1 py-2 rounded-lg bg-gradient-to-r from-gray-400 to-gray-500 text-white font-semibold shadow-lg hover:scale-105 transition-all"
+                                className="flex-1 min-w-[140px] py-2.5 rounded-xl bg-gradient-to-r from-gray-400 to-gray-500 text-white shadow-lg hover:scale-105 hover:shadow-gray-500/50 transition-all"
                             >
                                 Cancel
                             </button>
@@ -206,7 +212,7 @@ export default function ProfilePage() {
                 )}
             </div>
 
-            {/* Animation keyframes */}
+            {/* Animations */}
             <style>{`
                 @keyframes fadeIn {
                     from { opacity: 0; transform: translateY(20px); }

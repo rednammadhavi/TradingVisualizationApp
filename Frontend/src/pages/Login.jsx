@@ -29,17 +29,18 @@ export default function Login() {
     };
 
     return (
-        <div className="relative flex justify-center items-center min-h-screen px-4 overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+        <div className="relative flex justify-center items-center min-h-[90.8vh] px-6 sm:px-8 md:px-12 lg:px-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
             {/* Background glow */}
-            <div className="absolute top-0 left-0 w-60 h-60 bg-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
+            <div className="absolute top-0 left-0 w-56 h-56 bg-purple-400 rounded-full blur-3xl opacity-20 animate-pulse"></div>
             <div className="absolute bottom-0 right-0 w-72 h-72 bg-blue-400 rounded-full blur-3xl opacity-20 animate-pulse delay-200"></div>
 
             {/* Card */}
-            <div className="relative w-full max-w-md backdrop-blur-xl bg-white/40 dark:bg-gray-800/40 border border-white/30 rounded-2xl shadow-2xl p-8 animate-fadeIn">
-                <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent mb-8">
+            <div className="relative w-full max-w-md backdrop-blur-xl bg-white/60 dark:bg-gray-800/60 border border-white/30 dark:border-gray-700 rounded-3xl shadow-2xl p-10 sm:p-12 animate-fadeIn">
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent mb-6 p-2">
                     Welcome Back
                 </h1>
-                <form onSubmit={handleSubmit} className="space-y-5">
+
+                <form onSubmit={handleSubmit} className="space-y-7">
                     <input
                         type="email"
                         name="email"
@@ -47,7 +48,8 @@ export default function Login() {
                         value={form.email}
                         onChange={handleChange}
                         required
-                        className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white/70 dark:bg-gray-700/70"
+                        autoComplete="email"
+                        className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition"
                     />
 
                     {/* Password field with toggle */}
@@ -59,35 +61,38 @@ export default function Login() {
                             value={form.password}
                             onChange={handleChange}
                             required
-                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none pr-10 bg-white/70 dark:bg-gray-700/70"
+                            autoComplete="current-password"
+                            className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none pr-12 bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition"
                         />
-                        <span
+                        <button
+                            type="button"
                             onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-3 cursor-pointer text-gray-500"
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition focus:outline-none"
                         >
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </span>
+                            {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+                        </button>
                     </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-purple-500/50 transition-all duration-300"
+                        className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-purple-500/60 transition-transform duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                         {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
-                <div className="mt-6 flex justify-between text-sm text-gray-600 dark:text-gray-300">
+                <div className="mt-8 flex flex-col sm:flex-row justify-between text-sm text-gray-600 dark:text-gray-300 space-y-3 sm:space-y-0 sm:space-x-6">
                     <Link
                         to="/forgot-password"
-                        className="hover:underline hover:text-blue-500 transition-colors"
+                        className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-center sm:text-left"
                     >
                         Forgot Password?
                     </Link>
                     <Link
                         to="/register"
-                        className="hover:underline hover:text-blue-500 transition-colors"
+                        className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-center sm:text-right"
                     >
                         Register
                     </Link>
@@ -96,14 +101,14 @@ export default function Login() {
 
             {/* Animation keyframes */}
             <style>{`
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fadeIn {
-                    animation: fadeIn 0.8s ease-out forwards;
-                }
-            `}</style>
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+      `}</style>
         </div>
     );
 }
