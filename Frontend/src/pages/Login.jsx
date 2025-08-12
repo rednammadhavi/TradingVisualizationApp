@@ -41,6 +41,7 @@ export default function Login() {
                 </h1>
 
                 <form onSubmit={handleSubmit} className="space-y-7">
+                    {/* Email */}
                     <input
                         type="email"
                         name="email"
@@ -49,66 +50,72 @@ export default function Login() {
                         onChange={handleChange}
                         required
                         autoComplete="email"
-                        className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition"
+                        className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition dark:text-white"
                     />
 
-                    {/* Password field with toggle */}
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            placeholder="Password"
-                            value={form.password}
-                            onChange={handleChange}
-                            required
-                            autoComplete="current-password"
-                            className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none pr-12 bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition"
-                        />
-                        <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            aria-label={showPassword ? "Hide password" : "Show password"}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition focus:outline-none"
-                        >
-                            {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
-                        </button>
+                    {/* Password with forgot password link */}
+                    <div>
+                        <div className="relative">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                name="password"
+                                placeholder="Password"
+                                value={form.password}
+                                onChange={handleChange}
+                                required
+                                autoComplete="current-password"
+                                className="border border-gray-300 dark:border-gray-600 p-4 w-full rounded-xl focus:ring-3 focus:ring-blue-500 focus:outline-none pr-12 bg-white/80 dark:bg-gray-700/80 placeholder-gray-500 dark:placeholder-gray-400 transition dark:text-white"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                aria-label={showPassword ? "Hide password" : "Show password"}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition focus:outline-none"
+                            >
+                                {showPassword ? <FaEyeSlash size={20} className="dark:text-white" /> : <FaEye size={20} className="dark:text-white" />}
+                            </button>
+                        </div>
+                        <div className="flex justify-start mt-1">
+                            <Link
+                                to="/forgot-password"
+                                className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            >
+                                Forgot Password?
+                            </Link>
+                        </div>
                     </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-purple-500/60 transition-transform duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                        {loading ? "Logging in..." : "Login"}
-                    </button>
+                    {/* Login button with register link */}
+                    <div>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-purple-500/60 transition-transform duration-300 disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                            {loading ? "Logging in..." : "Login"}
+                        </button>
+                        <div className="flex justify-end mt-2">
+                            <Link
+                                to="/register"
+                                className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                            >
+                                Register
+                            </Link>
+                        </div>
+                    </div>
                 </form>
-
-                <div className="mt-8 flex flex-col sm:flex-row justify-between text-sm text-gray-600 dark:text-gray-300 space-y-3 sm:space-y-0 sm:space-x-6">
-                    <Link
-                        to="/forgot-password"
-                        className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-center sm:text-left"
-                    >
-                        Forgot Password?
-                    </Link>
-                    <Link
-                        to="/register"
-                        className="hover:underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-center sm:text-right"
-                    >
-                        Register
-                    </Link>
-                </div>
             </div>
 
             {/* Animation keyframes */}
             <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.8s ease-out forwards;
-        }
-      `}</style>
+                @keyframes fadeIn {
+                  from { opacity: 0; transform: translateY(20px); }
+                  to { opacity: 1; transform: translateY(0); }
+                }
+                .animate-fadeIn {
+                  animation: fadeIn 0.8s ease-out forwards;
+                }
+            `}</style>
         </div>
     );
 }

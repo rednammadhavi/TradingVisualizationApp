@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Watchlist from './pages/Watchlist';
 import Market from './pages/Market';
 import CryptoProfile from './pages/CryptoProfile';
+import NotFound from "./pages/NotFound";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/market" element={<Market />} />
 
         <Route path="/crypto/:id" element={<CryptoProfile />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <ToastContainer position="top-right" autoClose={3000} />
