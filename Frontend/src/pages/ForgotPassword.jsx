@@ -1,28 +1,21 @@
 import { useState } from "react";
-import { login as loginUser } from "../api/auth";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { forgotPassword } from "../api/user";
 
-export default function Login() {
-    const [form, setForm] = useState({ email: "", password: "" });
+export default function ForgotPassword() {
+    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
-    const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
-
-    const handleChange = (e) =>
-        setForm({ ...form, [e.target.name]: e.target.value });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await loginUser(form);
-            localStorage.setItem("token", data.data.token);
-            toast.success("Login successful!");
-            navigate("/");
+            await forgotPassword({ email });
+            toast.success("Password reset link sent to your email!");
+            setEmail("");
         } catch (error) {
-            toast.error(error.response?.data?.message || "Login failed");
+            toast.error(error.response?.data?.message || "Failed to send reset link");
         } finally {
             setLoading(false);
         }
@@ -37,59 +30,38 @@ export default function Login() {
             {/* Card */}
             <div className="relative w-full max-w-md backdrop-blur-xl bg-white/40 dark:bg-gray-800/40 border border-white/30 rounded-2xl shadow-2xl p-8 animate-fadeIn">
                 <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent mb-8">
-                    Welcome Back
+                    Forgot Password
                 </h1>
+                <p className="text-center text-gray-600 dark:text-gray-300 mb-6">
+                    Enter your email address and we’ll send you a link to reset your password.
+                </p>
+
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <input
                         type="email"
                         name="email"
                         placeholder="Email"
-                        value={form.email}
-                        onChange={handleChange}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                         className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white/70 dark:bg-gray-700/70"
                     />
-
-                    {/* Password field with toggle */}
-                    <div className="relative">
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            placeholder="Password"
-                            value={form.password}
-                            onChange={handleChange}
-                            required
-                            className="border border-gray-300 dark:border-gray-600 p-3 w-full rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none pr-10 bg-white/70 dark:bg-gray-700/70"
-                        />
-                        <span
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-3 top-3 cursor-pointer text-gray-500"
-                        >
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </span>
-                    </div>
 
                     <button
                         type="submit"
                         disabled={loading}
                         className="w-full py-3 rounded-lg bg-gradient-to-r from-blue-600 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-purple-500/50 transition-all duration-300"
                     >
-                        {loading ? "Logging in..." : "Login"}
+                        {loading ? "Sending..." : "Reset Password"}
                     </button>
                 </form>
 
-                <div className="mt-6 flex justify-between text-sm text-gray-600 dark:text-gray-300">
+                <div className="mt-6 text-center">
                     <Link
-                        to="/forgot-password"
-                        className="hover:underline hover:text-blue-500 transition-colors"
+                        to="/login"
+                        className="hover:underline hover:text-blue-500 text-sm text-gray-600 dark:text-gray-300 transition-colors"
                     >
-                        Forgot Password?
-                    </Link>
-                    <Link
-                        to="/register"
-                        className="hover:underline hover:text-blue-500 transition-colors"
-                    >
-                        Register
+                        Back to Login
                     </Link>
                 </div>
             </div>
