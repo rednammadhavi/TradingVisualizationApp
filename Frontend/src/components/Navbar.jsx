@@ -70,7 +70,7 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-white/90 dark:bg-gray-900/95 border-b border-gray-300 dark:border-gray-700 transition-shadow duration-300 ${scrolled ? "shadow-lg" : ""
+                className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-300 dark:border-gray-700 transition-shadow duration-300 ${scrolled ? "shadow-lg" : ""
                     }`}
                 role="navigation"
                 aria-label="Main Navigation"
@@ -84,7 +84,8 @@ export default function Navbar() {
                                 aria-label="Go to homepage"
                             >
                                 <span className="font-extrabold text-xl sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500">
-                                    CryptoTracker
+                                    C<span className="font-normal">rypto</span>
+                                    T<span className="font-normal">racker</span>
                                 </span>
                             </Link>
                         </div>
@@ -194,7 +195,7 @@ export default function Navbar() {
                 <div
                     ref={menuRef}
                     id="mobile-menu"
-                    className={`md:hidden bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 overflow-hidden transition-[max-height] duration-300 ease-in-out ${menuOpen ? "max-h-screen py-4" : "max-h-0"
+                    className={`md:hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-300 dark:border-gray-700 overflow-hidden transition-[max-height] duration-300 ease-in-out ${menuOpen ? "max-h-screen py-4" : "max-h-0"
                         }`}
                     aria-hidden={!menuOpen}
                 >
